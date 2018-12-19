@@ -8,10 +8,11 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-
+currentUser;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.currentUser = localStorage.getItem('uid');
   }
 
     // public logout() {

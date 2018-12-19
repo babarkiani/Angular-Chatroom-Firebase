@@ -21,6 +21,10 @@ export class ApiService {
     getUser(uid) {
       return this.afs.doc('users/' + uid).valueChanges();
     }
+
+    getUserWithId(uid) {
+      return this.afs.collection('users', resp => resp.where('id', '==', uid)).snapshotChanges();
+    }
       // Read ALL
       getCustomers(uid) {
     return this.afs.doc('users').snapshotChanges();

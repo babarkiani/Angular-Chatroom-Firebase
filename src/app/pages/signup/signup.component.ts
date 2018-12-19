@@ -54,8 +54,10 @@ export class SignupComponent implements OnInit,OnDestroy {
      if(this.signupForm.valid) {
       this.loadingService.isLoading.next(true);
         let user = this.signupForm.value;
-        user.photoUrl='gs://chat-b22c2.appspot.com/default-profile-pic.jpg';
-      this.auth.signup(user.email,user.password).then(res => {
+        user.photoUrl='https://firebasestorage.googleapis.com/v0/b/chat-b22c2.appspot.com/o/default-profile-pic.jpg?alt=media&token=6bc09dcb-8844-44f7-a5b7-133997238317';
+        user.quote = 'Life is a box of chocolates, you never know what you gonna get';
+        user.bio = 'Bio is under construction....';
+        this.auth.signup(user.email,user.password).then(res => {
         this.api.createUser(res.user.uid,user).then(resp => {
           console.log(resp);
           if(res) {

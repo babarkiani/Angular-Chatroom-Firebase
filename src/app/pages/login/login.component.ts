@@ -28,6 +28,9 @@ private returnUrl: string;
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat';
+    if(!!(localStorage.getItem('uid'))) {
+      this.router.navigateByUrl('/chat');
+    }
   }
 
     private createForm(): void {
@@ -42,13 +45,15 @@ private returnUrl: string;
    submit() {
 
       if(this.loginForm.valid) {
-        this.loadingService.isLoading.next(true);
+
         let {email,password} = this.loginForm.value;
 
           this.auth.login(email,password).then(res => {
             this.api.getUser(res.user.uid).subscribe(resp => {
               if(resp){
+                this.loadingService.isLoading.next(false);
                 this.auth.saveToken(res.user.uid);
+
                 this.router.navigateByUrl(this.returnUrl);
               } else{
                 this.loadingService.isLoading.next(false);

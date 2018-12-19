@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+
+<div class="container" *ngFor="let users of user" >
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-8 col-md-6" *ngIf="user else noPhoto">
+      <img [src]="users?.photoUrl" alt="profile-pic" class="rounded-circle mx-auto d-block profile-pic" >
+    </div>
+  </div>
+
+  <div class="row justify-content-center" >
+      <div class="col-xs-12 col-sm-8 col-md-6 text-center name" >
+        {{users?.firstName}}  {{users?.lastName}}
+      </div>
+  </div>
+
+  <div class="row justify-content-center">
+      <div class="col-xs-12 col-sm-8 col-md-6 text-center quote" >
+         <blockquote class="blockquote">
+          <p >
+            "{{users?.quote}}"
+          </p>
+         </blockquote>
+        </div>
+</div>
+<div class="row justify-content-center">
+        <div class="col-xs-12 col-sm-8 col-md-6 text-center bio" >
+            {{users?.bio}}
+          </div>
+  </div>
+
+  <div class="row justify-content-center" *ngIf="users?.id == currentUser">
+      <div class="col-xs-12 col-sm-8 col-md-6 text-center edit-button" >
+        <button [routerLink]="'/profile/' + currentUser?.id + '/edit'" class="btn btn-primary">Edit Profile</button>
+      </div>
+  </div>
+
+
+</div>
+
+<ng-template #noPhoto>
+  <div class="no-photo d-flex justify-content-center align-items-center">
+    No Photo
+  </div>
+</ng-template>
